@@ -7,4 +7,4 @@ compatibility_date = "2024-01-01"
 # 생성된 id를 아래에 입력
 [[kv_namespaces]]
 binding = "RECIPES"
-id = "YOUR_KV_NAMESPACE_ID"
+id = "5506294abf2346b8ac6c9f4ac3fe9f8b"

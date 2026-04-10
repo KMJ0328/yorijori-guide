@@ -6,7 +6,7 @@ const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
-const DATA_PATH = path.join(__dirname, 'src', 'recipes-data.json');
+const DATA_PATH = path.join(__dirname, 'src', 'recipes-final.json');
 
 // 별칭 매핑 (오타, 줄임말, 유사어 → 실제 키)
 const ALIASES = {

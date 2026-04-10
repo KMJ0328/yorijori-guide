@@ -142,10 +142,14 @@ function formatRecipe(recipe) {
   }
   text += '\n';
 
-  // 재료
+  // 재료 (도구류 제외)
+  const toolWords = ['냄비', '도마', '나이프', '스푼', '밀폐', '프라이팬', '볼', '체', '거품기'];
   if (recipe.ingredients && recipe.ingredients.length > 0) {
+    const filtered = recipe.ingredients.filter(item =>
+      !toolWords.some(t => item.includes(t))
+    );
     text += '🛒 준비 재료\n';
-    recipe.ingredients.forEach((item, i) => {
+    filtered.forEach((item, i) => {
       text += `${i + 1}. ${item}\n`;
     });
     text += '\n';
@@ -160,11 +164,13 @@ function formatRecipe(recipe) {
     text += '\n';
   }
 
-  // 조리 순서
+  // 조리 순서 (각 단계 80자로 제한)
   if (recipe.steps && recipe.steps.length > 0) {
     text += '👨‍🍳 조리 순서\n';
     recipe.steps.forEach((step, i) => {
-      text += `${i + 1}. ${step}\n`;
+      let clean = step.replace(/\n/g, ' ').replace(/\s+/g, ' ').trim();
+      if (clean.length > 80) clean = clean.substring(0, 77) + '...';
+      text += `${i + 1}. ${clean}\n`;
     });
     text += '\n';
   }
@@ -174,9 +180,11 @@ function formatRecipe(recipe) {
     text += `💡 꿀팁: ${recipe.tip}\n`;
   }
 
-  // 카카오톡 텍스트 제한 (1000자)
-  if (text.length > 990) {
-    text = text.substring(0, 987) + '...';
+  // 카카오톡 simpleText 제한 (1000자)
+  if (text.length > 950) {
+    // 조리 순서까지만 포함하도록 잘라냄
+    const cutIdx = text.lastIndexOf('\n', 940);
+    text = text.substring(0, cutIdx > 0 ? cutIdx : 940) + '\n...';
   }
 
   return text;
