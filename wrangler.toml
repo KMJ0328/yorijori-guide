@@ -2,9 +2,5 @@ name = "yorijori-guide"
 main = "src/index.js"
 compatibility_date = "2024-01-01"
 
-# KV 바인딩 (배포 전에 KV namespace 생성 필요)
-# wrangler kv namespace create RECIPES
-# 생성된 id를 아래에 입력
-[[kv_namespaces]]
-binding = "RECIPES"
-id = "5506294abf2346b8ac6c9f4ac3fe9f8b"
+# KV 제거 - 레시피 데이터를 Worker 코드에 직접 내장 (무료 한도 걱정 없음)
+# JSON import 방식으로 recipes-final.json을 번들링
