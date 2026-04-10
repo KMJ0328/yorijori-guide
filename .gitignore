@@ -1,0 +1,4 @@
+node_modules/
+.wrangler/
+debug*.js
+kv-bulk-data.json
